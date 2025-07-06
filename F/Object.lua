@@ -10,6 +10,7 @@ Object.__index = Object
 
 function Object:new(x,y)
     local o = {
+        name = "Object",
         x = x or 0,
         y = y or 0
     }
