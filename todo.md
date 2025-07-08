@@ -1,3 +1,7 @@
+### Monday 7th July 2025
+- [x] feat: add player movement
+- [x] feat: add player controller
+
 ### Sunday 6th July 2025
 - [x] feat: add Object:update()
 - [x] feat: add simple Renderer
@@ -5,5 +9,5 @@
 
 ### Backlog
 
-- [ ] feat: add player controller
+- [ ] feat: add vector based movement
 - [ ] fix: remove ECS dependency from event manager
