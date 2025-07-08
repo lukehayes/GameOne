@@ -12,7 +12,11 @@ function Object:new(x,y)
     local o = {
         name = "Object",
         x = x or 0,
-        y = y or 0
+        y = y or 0,
+        w = 16,
+        h = 16,
+        color = {r=1, g=0, b=1,a=1},
+        style = 'fill'
     }
 
     return setmetatable(o, Object)
