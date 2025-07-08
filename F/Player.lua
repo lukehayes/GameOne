@@ -16,28 +16,23 @@
 /*                                                                      */
 /************************************************************************/
 ]]
-local Object = require 'F.Object'
 local Util   = require 'F.Util'
 
-local Player = {
-  __tostring = function() return "Player" end
-}
-Player.__index = Player
 
-function Player:new(x,y)
+function PlayerCreate(x,y)
 
-  setmetatable(Player, {__index = Object})
+  local obj = {}
 
-  local obj = Object:new(x,y)
-  setmetatable(obj, Player)
-
-  obj.name = "Player"
+  obj.x = x or 0
+  obj.y = y or 0
+  obj.w = 16
+  obj.h = 16
   obj.color = {r=1, g=1, b=1,a=1}
   obj.speed = 50
+  obj.name = "Player"
+  obj.style = "fill"
 
   return obj
 
 end
 
-
-return Player
