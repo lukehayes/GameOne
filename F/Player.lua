@@ -33,6 +33,7 @@ function Player:new(x,y)
 
   obj.name = "Player"
   obj.color = {r=1, g=1, b=1,a=1}
+  obj.speed = 50
 
   return obj
 

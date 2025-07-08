@@ -16,7 +16,8 @@ function Object:new(x,y)
         w = 16,
         h = 16,
         color = {r=1, g=0, b=1,a=1},
-        style = 'fill'
+        style = 'fill',
+        speed = 100
     }
 
     return setmetatable(o, Object)
