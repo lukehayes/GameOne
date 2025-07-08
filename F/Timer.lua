@@ -17,10 +17,16 @@
 /************************************************************************/
 ]]
 
-function TimerCreate(duration, callback)
+--- Create a new Timer.
+---@param duration number Time timer should run for.
+---@param oneshot boolean
+---@param callback function Callback to run when timer finishes.
+---@return table
+function TimerCreate(duration, oneshot, callback)
   local obj = {}
   obj.duration = duration or 3
   obj.elapsed = 0
+  obj.oneshot = oneshot or nil
   obj.finished = false
   obj.callback = callback
   obj.fired = nil
@@ -28,16 +34,19 @@ function TimerCreate(duration, callback)
   return obj
 end
 
+--- Update a Timer instance.
+---@param timer table Instance of Timer.
+---@param dt number Delta time.
 function TimerUpdate(timer,dt)
 
   if timer.finished then return end
 
-  if timer.elapsed >= timer.duration then
-    if not timer.fired then
-      timer.callback()
-      timer.fired = true
+  if timer.elapsed >= timer.duration and not timer.finished then
+    timer.callback()
+    timer.elapsed = 0
+
+    if timer.oneshot then
       timer.finished = true
-      timer.elapsed = 0
     end
   else
     timer.elapsed = timer.elapsed + dt

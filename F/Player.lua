@@ -19,6 +19,10 @@
 local Util   = require 'F.Util'
 
 
+---Create a new Player instance.
+---@param x any
+---@param y any
+---@return table
 function PlayerCreate(x,y)
 
   local obj = {}
@@ -37,6 +41,8 @@ function PlayerCreate(x,y)
 
 end
 
+---Player movement input.
+---@param p table Player instance.
 function PlayerInput(p)
 
   if love.keyboard.isDown('w') then
