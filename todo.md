@@ -1,4 +1,5 @@
-### Monday 7th July 2025
+### Tuesday 8th July 2025
+- [x] feat: add timer
 - [x] feat: add player movement
 - [x] feat: add player controller
 
