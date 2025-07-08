@@ -23,6 +23,12 @@ function Object:new(x,y)
     return setmetatable(o, Object)
 end
 
+function Object:update(dt)
+  self.x = self.x + self.speed * dt
+end
+
+
+
 function Object:toString()
   return "" .. self.name .. " Class"
 end
