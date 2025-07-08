@@ -17,6 +17,7 @@
 /************************************************************************/
 ]]
 local Object = require 'F.Object'
+local Util   = require 'F.Util'
 
 local Player = {
   __tostring = function() return "Player" end
@@ -31,6 +32,7 @@ function Player:new(x,y)
   setmetatable(obj, Player)
 
   obj.name = "Player"
+  obj.color = {r=1, g=1, b=1,a=1}
 
   return obj
 
