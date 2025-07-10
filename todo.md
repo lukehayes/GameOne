@@ -1,4 +1,5 @@
 ### Thursday 10th July 2025
+- [x] feat: add color constants
 - [x] feat: add collision detection
 
 ### Tuesday 8th July 2025
