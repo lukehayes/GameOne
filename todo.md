@@ -1,3 +1,6 @@
+### Thursday 10th July 2025
+- [x] feat: add collision detection
+
 ### Tuesday 8th July 2025
 - [x] feat: add oneshot to timer
 - [x] feat: add timer
