@@ -17,7 +17,7 @@
 /************************************************************************/
 ]]
 
-local Color = require 'F.Color'
+local Color = require("F.Color")
 
 local Point = {}
 Point.__index = Point
@@ -26,13 +26,13 @@ Point.__index = Point
 ---@param x number The x position.
 ---@param y number The y position.
 ---@return table
-function Point:new(x,y)
+function Point:new(x, y)
   local obj = {
     x = x,
     y = y,
-    w = 1,
-    h = 1,
-    color = Color.WHITE
+    w = 4,
+    h = 4,
+    color = Color.WHITE,
   }
   return setmetatable(obj, Point)
 end
@@ -42,23 +42,11 @@ end
 ---@param y number The y position.
 ---@return table
 function Point:draw()
+  love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
 
-  love.graphics.setColor(
-    self.color.r,
-    self.color.g,
-    self.color.b,
-    self.color.a
-  )
+  love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
 
-  love.graphics.rectangle(
-    'fill',
-      self.x,
-      self.y,
-      1,
-      1
-  )
-
-  love.graphics.setColor(1,1,1,1)
+  love.graphics.setColor(1, 1, 1, 1)
 end
 
 return Point
