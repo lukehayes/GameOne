@@ -17,14 +17,14 @@
 /************************************************************************/
 ]]
 
-local Col = require 'F.col.Collision'
+local Col = require("F.col.Collision")
 
 local Quadtree = {}
 Quadtree.__index = Quadtree
 
 ---Create a new Quadtree instance.
 ---@return table
-function QuadTreeCreate(x,y,w,h)
+function QuadTreeCreate(x, y, w, h)
   local obj = {}
 
   obj.x = x
@@ -32,8 +32,8 @@ function QuadTreeCreate(x,y,w,h)
   obj.w = w
   obj.h = h
   obj.max_children = 4
-  obj.children     = {}
-  obj.subdivided   = nil
+  obj.children = {}
+  obj.divided = nil
   obj.level = 0
 
   obj.NW = nil
@@ -42,15 +42,13 @@ function QuadTreeCreate(x,y,w,h)
   obj.SW = nil
 
   return obj
-
 end
 
 ---Insert a Node into the Quadtree
 ---@param qt table The Quadtree
 ---@param point table The point to be inserted
 function QuadTreeInsert(qt, point)
-
-  if Col.inside(point, qt) ~= true then
+  if not Col.inside(point, qt) then
     --print("Point " .. point.x .. " " .. point.y .. " not inside. Bailing.")
     return
   end
@@ -60,56 +58,38 @@ function QuadTreeInsert(qt, point)
     table.insert(qt.children, point)
     return true
   else
+    if not qt.divided then
+      print("Subdividing...")
+      qt.NW = QuadTreeCreate(qt.x, qt.y, qt.w / 2, qt.h / 2)
 
-    print("Subdividing...")
-    qt.NW = QuadTreeCreate(
-      qt.x,
-      qt.y,
-      qt.w / 2,
-      qt.h / 2
-    )
+      qt.NE = QuadTreeCreate(qt.x + (qt.w / 2), qt.y, qt.w / 2, qt.h / 2)
 
-    qt.NE = QuadTreeCreate(
-      qt.x + (qt.w / 2),
-      qt.y,
-      qt.w / 2,
-      qt.h / 2
-    )
+      qt.SE = QuadTreeCreate(qt.x + (qt.w / 2), qt.y + (qt.h / 2), qt.w / 2, qt.h / 2)
 
-    qt.SE = QuadTreeCreate(
-      qt.x + (qt.w / 2),
-      qt.y + (qt.h / 2),
-      qt.w / 2,
-      qt.h / 2
-    )
+      qt.SW = QuadTreeCreate(qt.x, qt.y + (qt.h / 2), qt.w / 2, qt.h / 2)
 
-    qt.SW = QuadTreeCreate(
-      qt.x,
-      qt.y + (qt.h / 2),
-      qt.w / 2,
-      qt.h / 2
-    )
+      qt.divided = true
+    end
 
     QuadTreeInsert(qt.NE, point)
     QuadTreeInsert(qt.NW, point)
     QuadTreeInsert(qt.SE, point)
     QuadTreeInsert(qt.SW, point)
   end
-
-
 end
+
+function _subdivide(qt) end
 
 ---Helper for drawing the Quadtree
 ---@param quad table
 function _DrawQuad(quad)
   if quad then
-    love.graphics.rectangle('line', quad.x, quad.y, quad.w, quad.h)
+    love.graphics.rectangle("line", quad.x, quad.y, quad.w, quad.h)
     QuadTreeDraw(quad)
   end
 end
 
 function QuadTreeDraw(qt)
-
   local NE = qt.NE
   local NW = qt.NW
   local SE = qt.SE
@@ -130,9 +110,6 @@ function QuadTreeDraw(qt)
   if SW then
     _DrawQuad(SW)
   end
-
-
 end
-
 
 return Quadtree
