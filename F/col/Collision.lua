@@ -83,7 +83,7 @@ end
 ---@param b table
 ---
 ---@return boolean
-function Collision.inside(a,b)
+function Collision.inside(b,a)
     return b.x > a.x and
           (b.w + b.x) < (a.w + a.x) and
            b.y > a.y and
