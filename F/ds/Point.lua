@@ -30,6 +30,8 @@ function Point:new(x,y)
   local obj = {
     x = x,
     y = y,
+    w = 1,
+    h = 1,
     color = Color.WHITE
   }
   return setmetatable(obj, Point)
