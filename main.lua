@@ -1,56 +1,69 @@
-local Game = require 'F.Game'
-local Util = require 'F.Util'
+local Game = require("F.Game")
+local Util = require("F.Util")
 
-local Point = require 'F.ds.Point'
-require 'F.ds.Quadtree'
+local Point = require("F.ds.Point")
+require("F.ds.Quadtree")
 
 local points = {}
 
-for _ = 1, 10, 1 do
-  local rx = love.math.random(10,800)
-  local ry = love.math.random(10,600)
+-- for _ = 1, 1330 do
+--   local rx = love.math.random(10, 800)
+--   local ry = love.math.random(10, 600)
+--
+--   local p = Point:new(rx, ry)
+--
+--   table.insert(points, p)
+-- end
 
-  local p = Point:new(rx,ry)
+-- local qt = nil
+local scrW, scrH = love.graphics.getDimensions()
+local qt = QuadTreeCreate(0, 0, scrW, scrH)
 
-  table.insert(points, p)
-end
+-- for _, point in pairs(points) do
+--   QuadTreeInsert(qt, point)
+-- end
 
-local qt = QuadTreeCreate(0,0,800,600)
-
-for _, point in pairs(points) do
-  QuadTreeInsert(qt, point)
-end
-
-
-Game.events:emit('preload')
+Game.events:emit("preload")
 
 function love.load()
-  Game.events:emit('load')
+  Game.events:emit("load")
+  love.graphics.getLineWidth(10)
 end
 
 function love.update(dt)
-  Game.events:emit('preupdate')
+  Game.events:emit("preupdate")
 
-  Game.events:emit('postupdate')
+  local scrW, scrH = love.graphics.getDimensions()
+
+  local mx, my = love.mouse.getPosition()
+
+  if love.keyboard.isDown("space") then
+    local p = Point:new(mx, my)
+    QuadTreeInsert(qt, p)
+    table.insert(points, p)
+  end
+
+  Game.events:emit("postupdate")
 end
 
 function love.draw()
-  Game.events:emit('prerender')
+  Game.events:emit("prerender")
+
+  QuadTreeDraw(qt)
 
   for _, point in pairs(points) do
     point:draw()
   end
 
-  Game.events:emit('postrender')
+  Game.events:emit("postrender")
 end
 
 function love.keypressed(key, scancode, isrepeat)
-
-   if key == "space" then
-    Game.events:emit('space_pressed')
+  if key == "space" then
+    Game.events:emit("space_pressed")
   end
 
-   if key == "escape" then
-      love.event.quit()
-   end
+  if key == "escape" then
+    love.event.quit()
+  end
 end
