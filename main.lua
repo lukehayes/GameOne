@@ -18,6 +18,8 @@ local points = {}
 -- local qt = nil
 local scrW, scrH = love.graphics.getDimensions()
 local qt = QuadTreeCreate(0, 0, scrW, scrH)
+local pressed = false
+
 
 -- for _, point in pairs(points) do
 --   QuadTreeInsert(qt, point)
@@ -38,9 +40,19 @@ function love.update(dt)
   local mx, my = love.mouse.getPosition()
 
   if love.keyboard.isDown("space") then
-    local p = Point:new(mx, my)
-    QuadTreeInsert(qt, p)
-    table.insert(points, p)
+    if not pressed then
+      local p = Point:new(mx, my)
+      QuadTreeInsert(qt, p)
+      table.insert(points, p)
+      pressed = true
+    end
+  else
+    pressed = false
+  end
+
+  if love.keyboard.isDown('x') then
+    QuadtreeClear(qt)
+    --points = {}
   end
 
   Game.events:emit("postupdate")
