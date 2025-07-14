@@ -78,7 +78,21 @@ function QuadTreeInsert(qt, point)
   end
 end
 
-function _subdivide(qt) end
+function _clear(qt)
+  for key in pairs(qt.children) do
+    qt.children[key] = nil
+  end
+end
+
+function QuadtreeClear(qt)
+  print("Clear")
+    _clear(qt.NE)
+    _clear(qt.NW)
+    _clear(qt.SE)
+    _clear(qt.SW)
+  print("Clear finished")
+end
+
 
 ---Helper for drawing the Quadtree
 ---@param quad table
