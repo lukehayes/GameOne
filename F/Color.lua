@@ -28,5 +28,7 @@ Color.RED      = { r = 1, g = 0, b = 0, a = 1 }
 Color.GREEN    = { r = 0, g = 1, b = 0, a = 1 }
 Color.BLUE     = { r = 0, g = 0, b = 1, a = 1 }
 Color.YELLOW   = { r = 1, g = 1, b = 0, a = 1 }
+Color.PINK     = { r = 1, g = 0, b = 1, a = 1 }
+Color.DEBUG     = { r = 1, g = 0, b = 1, a = 0.25 }
 
 return Color
