@@ -49,17 +49,14 @@ end
 ---@param point table The point to be inserted
 function QuadTreeInsert(qt, point)
   if not Col.inside(point, qt) then
-    --print("Point " .. point.x .. " " .. point.y .. " not inside. Bailing.")
     return
   end
 
   if #qt.children < qt.max_children then
-    print("Inserting Node. Count", #qt.children)
     table.insert(qt.children, point)
     return true
   else
     if not qt.divided then
-      print("Subdividing...")
       qt.NW = QuadTreeCreate(qt.x, qt.y, qt.w / 2, qt.h / 2)
 
       qt.NE = QuadTreeCreate(qt.x + (qt.w / 2), qt.y, qt.w / 2, qt.h / 2)
