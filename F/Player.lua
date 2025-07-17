@@ -36,6 +36,7 @@ function PlayerCreate(x,y)
   obj.frameMove = 10
   obj.name = "Player"
   obj.style = "fill"
+  obj.area = AreaCreate(obj.x, obj.y, obj.w, obj.h)
 
   return obj
 
@@ -61,4 +62,7 @@ function PlayerInput(p)
     p.x = p.x + p.frameMove
   end
 
+  -- Update the player collsion area position
+  p.area.x = p.x - (p.area.w / 2) + p.w / 2
+  p.area.y = p.y - (p.area.h / 2) + p.h / 2
 end
