@@ -39,7 +39,7 @@ function PlayerCreate(x,y)
   obj.frameMove = 10
   obj.name = "Player"
   obj.style = "fill"
-  obj.area = AreaCreate(obj.x, obj.y, obj.w, obj.h)
+  obj.area = AreaCreate(obj.x, obj.y, obj.w + 50, obj.h + 50)
 
   return obj
 
