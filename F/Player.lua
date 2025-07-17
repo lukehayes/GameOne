@@ -65,4 +65,18 @@ function PlayerInput(p)
   -- Update the player collsion area position
   p.area.x = p.x - (p.area.w / 2) + p.w / 2
   p.area.y = p.y - (p.area.h / 2) + p.h / 2
+
+end
+
+---Draw the player
+---@param p table player table
+---@param drawCollision boolean if true, draws the collsion area.
+function PlayerDraw(p, drawCollision)
+  local collision = drawCollision or nil
+
+  R.draw(p)
+
+  if collision then
+    R.draw(p.area)
+  end
 end
