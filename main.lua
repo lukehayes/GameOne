@@ -75,9 +75,9 @@ function love.draw()
   for _, point in pairs(points) do
     point:draw()
   end
+
+  PlayerDraw(p,true)
   
-  R.draw(p)
-  R.draw(pa)
   R.draw(a1)
 
   Game.events:emit("postrender")
