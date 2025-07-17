@@ -17,6 +17,9 @@
 /************************************************************************/
 ]]
 local Util   = require 'F.Util'
+local R   = require("F.gfx.Renderer")
+
+require 'F.Area'
 
 
 ---Create a new Player instance.
