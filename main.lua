@@ -53,7 +53,7 @@ function love.update(dt)
 
   PlayerInput(p)
   
-  if Col.collides(p, a1) then
+  if Col.collides(p.area, a1) then
 
     if love.keyboard.isDown('space') then
       a1.x = love.math.random(100,500)
