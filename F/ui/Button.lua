@@ -27,13 +27,14 @@ Button.__index = Button
 ---@param w number
 ---@param h number
 ---@return table
-function ButtonCreate(x,y,w,h)
+function ButtonCreate(x,y,w,h, text)
   local obj = {}
 
   obj.x = x
   obj.y = y
   obj.w = w or 200
   obj.h = h or 50
+  obj.text  = text or "Text not set"
   obj.style = 'line'
   obj.color = Color.DEBUG
   obj.callback = function()
