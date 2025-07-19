@@ -25,6 +25,17 @@ function Renderer.reset()
   love.graphics.setColor(1,1,1,1)
 end
 
+---Set the color the renderer will draw with
+---@param color any
+function Renderer.setColor(color)
+  love.graphics.setColor(
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+end
+
 function Renderer.draw(object)
 
   love.graphics.setColor(
