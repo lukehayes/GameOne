@@ -20,6 +20,10 @@
 local Renderer = {}
 Renderer.__index = Renderer
 
+---Reset the draw color back to white.
+function Renderer.reset()
+  love.graphics.setColor(1,1,1,1)
+end
 
 function Renderer.draw(object)
 
