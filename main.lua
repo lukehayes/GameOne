@@ -51,8 +51,14 @@ function love.update(dt)
     table.insert(points, p)
   end
 
+  if love.keyboard.isDown('x') then
+    print(QuadtreeNodeCount(qt))
+    points = {}
+    QuadtreeClear(qt)
+  end
+
   PlayerInput(p)
-  
+
   if Col.collides(p.area, a1) then
 
     if love.keyboard.isDown('space') then
@@ -62,7 +68,7 @@ function love.update(dt)
       a1.h = love.math.random(10,500)
     end
   end
-  
+
   pa.x = p.x - (pa.w / 2) + p.w / 2
   pa.y = p.y - (pa.h / 2) + p.h / 2
 
@@ -72,12 +78,16 @@ end
 function love.draw()
   Game.events:emit("prerender")
 
+  if love.keyboard.isDown('space') then
+    QuadTreeDraw(qt)
+  end
+
   for _, point in pairs(points) do
     point:draw()
   end
 
   PlayerDraw(p,true)
-  
+
   R.draw(a1)
 
   Game.events:emit("postrender")

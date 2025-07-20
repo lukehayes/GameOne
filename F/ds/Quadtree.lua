@@ -109,4 +109,45 @@ function QuadTreeDraw(qt)
   end
 end
 
+function QuadtreeNodeCount(qt)
+
+  local total = #qt.children
+
+  if qt.NW then
+    total = total + QuadtreeNodeCount(qt.NW)
+    total = total + QuadtreeNodeCount(qt.NE)
+    total = total + QuadtreeNodeCount(qt.SE)
+    total = total + QuadtreeNodeCount(qt.SW)
+  end
+
+  return total
+end
+
+function QuadtreeClear(qt)
+
+  if not qt.NW then
+    --print("Nope - returning")
+    return
+  end
+
+  print("Clearing...")
+
+  local NW = qt.NW
+  local NE = qt.NE
+  local SE = qt.SE
+  local SW = qt.SW
+
+  for key, value in pairs(qt.children) do
+    qt.children[key] = nil
+    qt.children[value] = nil
+  end
+
+  QuadtreeClear(NW)
+  QuadtreeClear(NE)
+  QuadtreeClear(SE)
+  QuadtreeClear(SW)
+
+
+end
+
 return Quadtree
